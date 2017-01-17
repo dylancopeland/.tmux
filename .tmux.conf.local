@@ -124,14 +124,14 @@ tmux_conf_theme_window_status_last_bg='default'
 tmux_conf_theme_window_status_last_attr='none'
 
 # status left/right sections separators
-tmux_conf_theme_left_separator_main=''
-tmux_conf_theme_left_separator_sub='|'
-tmux_conf_theme_right_separator_main=''
-tmux_conf_theme_right_separator_sub='|'
-#tmux_conf_theme_left_separator_main=''  # /!\ you don't need to install powerline
-#tmux_conf_theme_left_separator_sub=''   #   you only need fonts patched with
-#tmux_conf_theme_right_separator_main='' #   powerline symbols or the standalone
-#tmux_conf_theme_right_separator_sub=''  #   PowerlineSymbols.otf font
+# tmux_conf_theme_left_separator_main=''
+# tmux_conf_theme_left_separator_sub='|'
+# tmux_conf_theme_right_separator_main=''
+# tmux_conf_theme_right_separator_sub='|'
+tmux_conf_theme_left_separator_main=''  # /!\ you don't need to install powerline
+tmux_conf_theme_left_separator_sub=''   #   you only need fonts patched with
+tmux_conf_theme_right_separator_main='' #   powerline symbols or the standalone
+tmux_conf_theme_right_separator_sub=''  #   PowerlineSymbols.otf font
 
 # status left/right content:
 #   - separate main sections with '|'
@@ -155,12 +155,12 @@ tmux_conf_theme_right_separator_sub='|'
 #     - #{uptime_s}
 #     - #{username}
 #     - #{username_ssh}
-tmux_conf_theme_status_left=' ❐ #S | ↑#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} '
-tmux_conf_theme_status_right='#{prefix}#{pairing}#{?battery_status, #{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{username}#{root} | #{hostname} '
+tmux_conf_theme_status_left=' ❐ #S | #(~/.tmux/segments/pwd) '
+tmux_conf_theme_status_right='#{prefix}#{pairing} , %l:%M %p , %b %d | #{username}#{root} | #{hostname} '
 
 # status left style
-tmux_conf_theme_status_left_fg='#000000,#e4e4e4,#e4e4e4'  # black, white , white
-tmux_conf_theme_status_left_bg='#ffff00,#ff00af,#00afff'  # yellow, pink, white blue
+tmux_conf_theme_status_left_fg='#000000,#000000,#e4e4e4'  # black, white , white
+tmux_conf_theme_status_left_bg='#ffff00,#83c684,#00afff'  # yellow, pink, white blue
 tmux_conf_theme_status_left_attr='bold,none,none'
 
 # status right style
@@ -224,19 +224,23 @@ tmux_conf_battery_status_discharging='🔋'  # U+1F50B
 
 # clock style
 tmux_conf_theme_clock_colour='#00afff'  # light blue
-tmux_conf_theme_clock_style='24'
+tmux_conf_theme_clock_style='12'
 
 
 # ------------------------------------------------------------------------------
 # this is the place to override or undo settings
+
+set -g prefix C-f
+
+set -g status-interval 1
 
 # increase history size
 #set -g history-limit 10000
 
 # force Vi mode
 #   really you should export VISUAL or EDITOR environment variable, see manual
-#set -g status-keys vi
-#set -g mode-keys vi
+# set -g status-keys vi
+# set -g mode-keys vi
 
 # move status line to top
 #set -g status-position top

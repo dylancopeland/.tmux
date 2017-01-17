@@ -1,0 +1,23 @@
+get_tmux_cwd() {
+  local env_name=$(tmux display -p "TMUXPWD_#D" | tr -d %)
+  local env_val=$(tmux show-environment | grep --color=never "$env_name")
+
+  if [[ ! $env_val =~ "unknown variable" ]]; then
+    local tmux_pwd=$(echo "$env_val" | sed 's/^.*=//')
+    echo "$tmux_pwd"
+  fi
+}
+
+tcwd=$(get_tmux_cwd)
+trunc_symbol="···"
+dir=${tcwd##*/}
+max_len=40
+max_len=$(( ( max_len < ${#dir} ) ? ${#dir} : max_len ))
+ttcwd=${tcwd/#$HOME/\~}
+pwdoffset=$(( ${#ttcwd} - max_len ))
+if [ ${pwdoffset} -gt "0" ]; then
+  ttcwd=${ttcwd:$pwdoffset:$max_len}
+  ttcwd=${trunc_symbol}/${ttcwd#*/}
+fi
+echo "$ttcwd"
+
