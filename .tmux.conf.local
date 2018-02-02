@@ -249,6 +249,8 @@ set -g prefix C-f
 
 set -g status-interval 1
 
+set -ga terminal-overrides ',xterm-256color:Tc'
+
 # increase history size
 #set -g history-limit 10000
 
